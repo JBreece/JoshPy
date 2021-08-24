@@ -101,3 +101,34 @@ print(data)
 norwegian = data.decode("utf8")
 print(norwegian == norsk)
 print(norwegian)
+
+# "strings" are immutable in python:
+name_1 = "test"
+print(id(name_1), name_1)
+name_1 = "test2"
+print(id(name_1), name_1) # notice when you set a new value for name_1 it actually creates a new object
+name_2 = "test"
+print(id(name_2), name_2) # notice the ID for name_2 is the same as name_1
+# also note that "lists" in python are mutable, unlike strings.
+# also lists can be heterogenous:
+a = ["apple", 7, "pear"]
+a.append(3.14)
+print(a)
+b = list("test") # list constructor
+print(b)
+
+# "dict" or dictionaries are a fundamental data structure in python
+# maps keys to values, also known as maps or associative arrays
+d = {"alice": "839-913-2057", "bob": "523-132-6923", "eve": "581-134-2740"}
+print(d["alice"])
+
+# iteration (for loops)
+cities = ["London", "New York", "Paris"]
+for city in cities:
+    print(city)
+colors = {"crimson": 0xdc143c, "coral": 0xff7f50, "teal": 0x008080}
+for color in colors:
+    print(color, colors[color])
+
+
+# Modularity
