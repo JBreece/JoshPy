@@ -132,3 +132,18 @@ for color in colors:
 
 
 # Modularity
+# function
+def square(x):
+    return x * x
+print("5 squared is ", square(5))
+
+# just a note on terminology, "dunder" method means a special function like __init__
+# dunder just means "Double UNDERscore"
+
+# __name__ or "dunder name" allows us to detect whether a module is run as a script or imported into another module
+# as in, if you run it from the REPL then it'll say "__name__" but if you run it as a script from cmd (without using python)
+# then you'll see "__main__" instead
+# for example in our "words.py" script if you add a line that says "print(__name__)" you'll see a different value for each scenario ^
+
+#also note in the "words.py" that if __name__ == '__main__': allows our module to be executable and importable
+#also note the """ <info> """ comments allow you to call help() on a given function, or for the module as a whole.  see words.py
