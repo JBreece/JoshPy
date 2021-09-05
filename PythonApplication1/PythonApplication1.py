@@ -147,3 +147,79 @@ print("5 squared is ", square(5))
 
 #also note in the "words.py" that if __name__ == '__main__': allows our module to be executable and importable
 #also note the """ <info> """ comments allow you to call help() on a given function, or for the module as a whole.  see words.py
+
+a = 123
+print("a is ", id(a))
+a = 456
+print("a is now ", id(a))
+# ints are immutable, so a new object in memory is created rather than reassigning the existing object to a new value.
+b = 789
+print("is a = b?", id(a) == id(b))
+b = a
+print("is a = b?", a is b) # "is" operator is the same as "id(a) == id(b)"
+r = [2, 4, 6]
+print("r is ", id(r))
+s = r
+s[1] = 17
+print("r is still ", id(r), "because arrays are mutable in python") # no new object is created.
+print(s is r)
+
+
+# VERY IMPORTANT TO KNOW - ALL ARGUMENTS PASSED IN FUNCTIONS IN PYTHON ARE PASSED BY REFERENCE
+# this means if you change the parameter within that function, it will ACTUALLY change it (so annoying why cant every language just be C)
+a = [1, 2, 3]
+def modify(b):
+    b.append(4)
+    print("b =", b)
+modify(a)
+print(a) # notice here that a has ACTUALLY been changed, not just passed by value for the sake of the function
+
+a = [1, 2, 3]
+def modify(b):
+    b = [4, 5, 6]
+    print("b =", b)
+modify(a)
+print(a) # in this case because we assigned b to a new value rather than modifying it, then that reassignment created a new object.  so a was unchanged in this case.
+
+a = [1, 2, 3]
+def modify(b):
+    c = b.copy()
+    c.append(4)
+    print("c =", c)
+modify(a)
+print(a) # copy
+
+# just another related note, if you have a default argument passed in your function, make sure to have only immutable values passed in that default arg.  otherwise, because default will change based on what you do in the function:
+def add_spam(menu=[]):
+    menu.append("spam")
+    return menu
+breakfast = ['bacon', 'eggs']
+print(add_spam(breakfast)) # seems like it's working fine
+print(add_spam()) # still seems ok
+print(add_spam()) # uh oh why is there already a spam there
+print(add_spam()) # oh dear god i'll never use a mutable value as a default value again
+
+def add_spam(menu=None):
+    if menu is None:
+        menu = []
+    menu.append('spam')
+    return menu
+print(add_spam())
+print(add_spam())
+print(add_spam()) # this is fine now
+
+# how to go up in scope within a function (is this recommended?  seems like bad practice):
+count = 0
+def show_count():
+    print(count)
+def set_count(c):
+    count = c
+show_count()
+set_count(5)
+show_count() # see here that "count" has not changed - this is because "count" within set_count is local to that function.  to change the global "count" variable you need to do the following:
+def set_count(c):
+    global count
+    count = c
+show_count()
+set_count(5)
+show_count() # now it changes.  (again, not sure if it's best practice to edit global variables from within a local scope.  maybe it's ok in python?)
