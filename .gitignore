@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# adding input/output files from rosalind:
+rosalind/input.txt
+rosalind/output.txt
