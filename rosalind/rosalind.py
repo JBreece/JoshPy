@@ -147,3 +147,67 @@ for index, x in enumerate(dna):
 reverse_compliment = dna[::-1] # this is the "extended slice" in python - [begin:end:step]
 # print(dna)
 print(reverse_compliment)
+
+
+# problem 4 Rabbits and Recurrence Relations
+print('\nproblem 4')
+
+n = 5 # changing this to the default from the problem, since it requires a lot of cpu time to calculate this
+k = 3
+p = 1
+
+def bunnies(n):
+    if(n > 1):
+        p = bunnies(n-1) + (bunnies(n-2) * k)
+        # note here, the struggle with this one was figuring out that because you have to go 2 generations back (because the bunnies need 1 generation to grow into maturity to be able to reproduce) then you actually need to have 2 base cases, not just 1.  Something to keep in mind for future recursion problems, if you have to go multiple "generations" (function calls) backwards (as in, function(n-2) or function(n-3) you'll need that many base cases.  So needed the below 2 base cases:
+    elif(n == 1):
+        p = 1
+    else:
+        p = 0
+    return p
+
+print(bunnies(n))
+# lesson learned here, for any recursive function f(n), you'll need x number of base cases where x is the number of previous steps you take backwards in the recursive function, such as f(n-x)
+    # in the above example, f(n-x) is bunnies(n-2), so x = 2.  2 base cases required.
+
+
+# problem 5 Mortal Fibonacci Rabbits
+print('\nproblem 5')
+
+p = 1
+n = 6
+m = 3
+k = 1 # could just leave this out, but in the spirit of keeping consistency with the bunny problems, "k" is just 1 for this problem (mature rabbit pairs only produce 1 offspring when they reproduce)
+def bunnies_mortal(n):
+    if(n > 1):
+        p = bunnies_mortal(n-1) + (bunnies_mortal(n-2) * k) - bunnies_mortal(n-(m+1))
+        #print(p)
+    elif(n == 1):
+        p = 1
+    else:
+        p = 0
+    return p
+
+#bunnies_mortal(n)
+print(bunnies_mortal(n))
+
+# can't figure out why my solution is not working.  There's a problem conceptually with what I'm doing where my code can't "remember" when it's already killed off a bunny, but that should be giving me less bunnies than the solution, not more.  Not sure what's going on.
+# this solution from online works, but I'm not sure why or how, and I'm not sure how I should have come to the conclusion to get to this solution (like what logically should have led to this) and there's no good explanation that I can find online.  So next steps I can take a look at this solution and figure out how it works, but for now I'm going to something else.  Rosalind doesn't actually post their suggested solutions/explanations so if you don't have a teacher it's either hope google helps, or give up.  So I'm going to look for a different tutorial site.
+def mortal_rabbits(n, m):
+    sequence = [1, 1]
+
+    for i in range(n - 2):
+        new_num = 0
+        if i + 2 < m:
+            #Normal fibonacci - No deaths yet
+            new_num = sequence[i] + sequence[i + 1]
+        else:
+            #Different reoccurence relation - Accounting for death
+            for j in range(m - 1):
+                new_num += sequence[i - j]
+
+        sequence.append(new_num)
+
+    return sequence
+
+print(mortal_rabbits(n, m))
