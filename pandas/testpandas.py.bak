@@ -8,5 +8,3 @@ mydataset = {
 myvar = pandas.DataFrame(mydataset)
 
 print(myvar)
-
-print(pd.__version__)
