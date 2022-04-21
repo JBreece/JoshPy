@@ -1,0 +1,94 @@
+# tuples
+
+print("hello world project3")
+
+t = ("Norway", 4.953, 3)
+for item in t:
+    print(item)
+
+nested_tuple = ((220, 284), (1184, 1210), (2620, 2924), (5020, 5564), (6232, 6368))
+print(nested_tuple[2][1])
+
+# function to return multiple items from a tuple (for example, the min and max of a tuple)
+def minmax(items):
+    return min(items), max(items)
+print(minmax([83, 33, 84, 32]))
+
+# tuple unpacking = destructuring operation that unpacks data structures into named references
+lower, upper = minmax([83, 33, 84, 32])
+print("lower = " + str(lower))
+print("upper = " + str(upper))
+
+a = 'jelly'
+b = 'bean'
+a, b = b, a
+print(a, b)
+
+
+
+# strings
+
+colors = ';'.join(['#45ff23', '#2321fa', '#1298a3', '#a32312'])
+print(colors)
+print(colors.split(';'))
+
+print("unforgetable".partition('forget'))
+departure, separator, arrival = "London:Edinburgh".partition(':')
+print(departure)
+print(arrival)
+# side note here unrelated to above example, underscores are treated as dummy values in a lot of python projects
+
+print("The age of {0} is {1}.  {0}'s birthday is on {2}".format('Jim', 32, 'October 31'))
+print("Current position {latitude} {longitude}".format(latitude = "60N", longitude = "5E"))
+print("Galactic position x = {pos[0]}, y = {pos[1]}, z = {pos[2]}".format(pos=(65.2, 23.1, 82.2))) # using indices of tuples
+import math
+print("Math constants: pi = {m.pi}, e = {m.e}".format(m=math))
+
+# f strings (python 3.6 feature) allows you to use fstrings to embed expressions inside literal strings, for example:
+print("one plus one is {1 + 1}") # not using f strings
+print(f"one plus one is {1 + 1}") # using f strings
+import datetime
+print(f"The current time is {datetime.datetime.now().isoformat()}.") # f string lets you use functions within a string
+
+
+
+# lists
+
+r = [1, -4, 10, -16, 15]
+print(r[-1])
+print(r[-2]) # negative indices so you don't have to do something like "r[len(r) - 1]"
+print(r[1:3]) # slicing a list gives you this result
+print(r[:3]) # both start and stop index are optional when slicing
+w = "the quick brown fox jumps over the lazy dog".split()
+print(w)
+print(w.index('fox'))
+print(w.count("the"))
+print("fox" in w)
+print("cow" in w)
+w.sort(key = len)
+print(w) # from the previous line, we sorted the list and passed "len" to the key for the sort.  Any callable object (meaning, not a raw data type like int or char) can be passed as a key.
+
+
+
+# dictionaries
+
+names_and_ages = [ ('Alice', 32), ('Bob', 48), ('Charlie', 28), ('Daniel', 33) ]
+print(names_and_ages)
+d = dict(names_and_ages)
+print(d)
+for key, value in d.items(): # .items() iterates through a dict, giving us a (key, value) for each iteration:
+    print(f"{key} => {value}") # using .items in combination with fstrings
+    
+# sets
+# one of the most valuable features of "sets" vs lists or tuples is the built in union functions (similar to sql venn diagram style joins)
+
+blue_eyes = {"Olivia", "Harry", "Lily", "Jack", "Amelia"}
+blonde_hair = {"Harry", "Jack", "Amelia", "Mia", "Joshua"}
+print(blue_eyes.union(blonde_hair)) # full join
+print(blue_eyes.intersection(blonde_hair)) # inner join
+print(blue_eyes.difference(blonde_hair)) # left join
+print(blue_eyes.symmetric_difference(blonde_hair)) # outer join
+
+# other useful methods for sets include issubset(), issuperset(), and isdisjoint()
+
+# another note (unrelated to above), "protocols" in python are similar to interfaces or base classes in other languages, but not as strict.  it is a set of operations that a type must support to implement the protocol.  examples of protocols include "container" which requires that the type supports the "in" and "not in" operators (for example, item in container, or item not in container), or another protocol would be "sized" which requires the type to have the "len()" function to describe the size.
