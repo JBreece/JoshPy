@@ -1,3 +1,7 @@
+import sys
+from math import log
+
+
 DIGIT_MAP = {
 	'zero': '0',
 	'one': '1',
@@ -13,16 +17,17 @@ DIGIT_MAP = {
 
 def convert(s):
     """Convert a string to an integer."""
-    x = -1
     try:
         number = ''
         for token in s:
             number += DIGIT_MAP[token]
         x = int(number)
         print(f"Conversion succeeded! x = {x}")
-    except (KeyError, TypeError):
-        pass # this is a special statement that does nothing
-    return x
-# alternatively, we can do away with the "x = -1" and "pass" above, and simply put "return -1" after the except:
-# except (KeyError, TypeError):
-#     return -1
+    except (KeyError, TypeError) as e:
+        print(f"Conversion error: {e!r}", file = sys.stderr)
+        # return -1
+        raise
+        
+def string_log(s):
+    v = convert(s)
+    return log(v)
