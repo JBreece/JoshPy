@@ -92,3 +92,8 @@ print(blue_eyes.symmetric_difference(blonde_hair)) # outer join
 # other useful methods for sets include issubset(), issuperset(), and isdisjoint()
 
 # another note (unrelated to above), "protocols" in python are similar to interfaces or base classes in other languages, but not as strict.  it is a set of operations that a type must support to implement the protocol.  examples of protocols include "container" which requires that the type supports the "in" and "not in" operators (for example, item in container, or item not in container), or another protocol would be "sized" which requires the type to have the "len()" function to describe the size.
+
+
+
+
+# Iteration and Iterables
