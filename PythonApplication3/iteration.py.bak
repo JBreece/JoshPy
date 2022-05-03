@@ -82,3 +82,16 @@ print(next(h))
 print(next(h))
 print(next(i)) # because they are unique, they iterate separately
 # also a note here, "yield" is what stops a generator function.  so any code between the yields is run until it hits the next "yield" in the function.
+
+# iteration tools
+# using islice() and count() from the itertools module, we can easily add the first 1000 prime numbers:
+from itertools import count, islice
+thousand_primes = islice((x for x in count() if is_prime(x)), 1000)
+print(thousand_primes)
+print(list(thousand_primes)[-10:]) # converts islice object to a list, gets the last 10 from the list (of the first thousand primes)
+# now we recreate the generator (since it has already been called) and pass it to the sum function
+print(sum(islice((x for x in count() if is_prime(x)), 1000)))
+# 2 more tools - any() tells you if any of the iterable are true, all() tells you if they're all true
+print(any([False, False, True]))
+print(all([False, False, True]))
+# zip() function synchronizes iteration across 2 or more iterables
