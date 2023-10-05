@@ -33,3 +33,22 @@ print(sample_01.shape, sample_02.shape)
 #for a t-test we need the sample size to be the same, so let's take a sample of just the first 231 days for each:
 sample_01 = sample_01.sample(231)
 print(sample_01.shape, sample_02.shape)
+
+#levene's test checks whether the variance of the two groups are the same, like
+# the t-test but for variance rather than the mean
+print(stats.levene(sample_01['cnt'], sample_02['cnt']))
+diff = scale(np.array(sample_01['cnt']) - np.array(sample_02['cnt'], dtype=float))
+#note here - need to only run the below line if you want to see the histogram, otherwise it is combined with the box plot above.
+plt.hist(diff)
+
+plt.figure(figsize=(10, 8))
+stats.probplot(diff, plot=plt, dist='norm')
+plt.show()
+print(stats.shapiro(diff))
+#perform t test
+print(stats.ttest_ind(sample_01['cnt'], sample_02['cnt']))
+##tried a few different fixes but nothing here works, commenting this one out for now:
+#sample_01_df = pd.DataFrame({'cnt': sample_01.values.tolist()})
+#sample_02_df = pd.DataFrame({'cnt': sample_02.values.tolist()})
+#descriptives, results = rp.ttest(sample_01_df['cnt'], sample_02_df['cnt'])
+#print(descriptives)
